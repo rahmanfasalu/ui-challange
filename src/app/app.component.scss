@@ -1,0 +1,29 @@
+.logo{
+    img {
+        width: 160px;
+    }
+}
+
+.phone-box{
+    padding: 0;padding-right:10px;
+    a{
+       font-weight: bold;
+       text-decoration: underline;color: #000;
+    }
+    
+    @media (max-width: 320px) {
+        .xs-hide {
+            display: none;
+        }
+        .xs-hide-title {
+            display: none;
+        }
+    }
+
+    @media (max-width: 500px) {
+        .xs-hide-title {
+            display: none;
+        }
+    }
+   
+}
