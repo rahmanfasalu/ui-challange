@@ -12,7 +12,7 @@
    </div>
 
   <div class="container">
-      <div class="row home-title">
+       <div class="row home-title">
            <div class="col-12">
                   <img src="../../assets/home.jpg" />
                   <ul>
@@ -25,8 +25,56 @@
                       <button type="button" class="btn btn-warning">Download Expose</button>
                    </span>
             </div>
-          
-      </div>
-  </div>
+        </div>
 
+        <div class=" home-content" *ngIf="data && data.length">
+               
+                        <div *ngFor="let item of data; let i = index"  class="singleBox"
+                            [ngClass]="{'openedBox':toggleItem === 'collapseOne-'+i}" >
+                            <div class="row parent-row" >
+                            <div class="col-10" (click)="toggleAccordion('collapseOne-'+i,$event)">
+                               
+
+                                <input type="checkbox" [checked]="item.checked" (change)="changeCheckbox(i)" 
+                                [ngClass]="{'addMargin':item.childrens.length===0}"
+                                />
+                                <span *ngIf="item.childrens && item.childrens.length" class="indicater">
+                                        <span class="fa fa-minus-square-o" *ngIf="toggleItem === 'collapseOne-'+i"></span>
+                                        <span class="fa fa-plus-square-o" *ngIf="toggleItem !== 'collapseOne-'+i"></span>
+                                </span>                               
+                                <span  class="fa" [ngClass]="item.icon"></span>
+                                <span class="title">{{ item.title }}</span>
+                            </div>
+                            <div class="col-2 text-right">
+                                <a *ngIf="item.link" >
+                                    <span class="fa fa-download"  aria-hidden="true"></span>
+                                </a>
+                            </div>
+                            </div>
+                            
+                          <div class ="row" *ngIf="item.childrens && item.childrens.length && toggleItem === 'collapseOne-'+i">
+                            
+                              <div class="child-item row" *ngFor="let child of item.childrens"  
+                              [ngClass]="{'disable-this':child.disable}">
+                                    <div class="col-8">
+                                        <input type="checkbox" [checked]="child.checked" (change)="changeChildCheckbox(i)"/> 
+                                        <span class="fa" [ngClass]="child.icon"></span>
+                                        <span class="title">{{ child.title }}</span>
+                                    </div>
+                                    <div class="col-4 text-right">
+                                            <span  (click)="child.disable = !child.disable">
+                                                    <span  class="fa fa-eye"   aria-hidden="true"></span>
+                                            </span>
+                                            <a *ngIf="child.link" >
+                                                    <span class="fa fa-download"  aria-hidden="true"></span>
+                                            </a>
+                                    </div>
+                              </div>
+                            
+                          </div>
+
+
+                        </div>       
+        </div>
+  </div>
 </div>
